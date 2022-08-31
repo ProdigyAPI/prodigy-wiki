@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import type { AppProps } from "next/app"
 import { Global, css, ThemeProvider, Theme } from "@emotion/react"
 import NavigationBar from "../components/NavigationBar"
@@ -10,7 +10,8 @@ const lightTheme: Theme = {
         navigationBar: "#27272A",
         navigationBarText: "#fff",
         megaMenuBackground: "#6988f8",
-        megaMenuText: "#fff"
+        megaMenuText: "#fff",
+        tabelEvenBackground: "#F3F4F6"
     }
 }
 
@@ -21,13 +22,23 @@ const darkTheme: Theme = {
         navigationBar: "#524cff",
         navigationBarText: "#fff",
         megaMenuBackground: "#6988f8",
-        megaMenuText: "#fff"
+        megaMenuText: "#fff",
+        tabelEvenBackground: "#1F2937"
     }
 }
 
 const App = ({ Component, pageProps }: AppProps): JSX.Element => {
     const [isDarkMode, setIsDarkMode] = useState(false)
     const theme = isDarkMode ? darkTheme : lightTheme
+
+    useEffect(() => {
+        const localStorageTheme = localStorage.getItem("prodigy-wiki-dark-mode")
+        setIsDarkMode(localStorageTheme === "true")
+    }, [])
+
+    useEffect(() => {
+        localStorage.setItem("prodigy-wiki-dark-mode", isDarkMode.toString())
+    }, [isDarkMode])
 
     return (
         <ThemeProvider theme={theme}>

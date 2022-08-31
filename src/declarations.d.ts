@@ -9,6 +9,7 @@ declare module "@emotion/react" {
             navigationBarText: string
             megaMenuBackground: string
             megaMenuText: string
+            tabelEvenBackground: string
         }
     }
 }

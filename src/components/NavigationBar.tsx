@@ -70,6 +70,9 @@ const NavigationBar: NextComponentType<NextPageContext, {}, Props> = ({ isDarkMo
                         padding-top: 0.5rem;
                         border-radius: 0.5rem;
                         background-color: ${theme.colors.megaMenuBackground};
+                        &:hover {
+                            filter: brightness(85%);
+                        }
                     `}>
                         Items
                     </a>
@@ -103,7 +106,7 @@ const NavigationBar: NextComponentType<NextPageContext, {}, Props> = ({ isDarkMo
                         }
                     `}>
                         {names.map(name => (
-                            <Link href={`/${namesToIds.get(name) ?? "404"}`} passHref key={name}>
+                            <Link href={`/item/${namesToIds.get(name) ?? "404"}`} passHref key={name}>
                                 <LinkText linkColor="#22ff0058" backgroundSize={3}>
                                     {name}
                                 </LinkText>
