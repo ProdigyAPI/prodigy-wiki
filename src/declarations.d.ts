@@ -14,6 +14,7 @@ declare module "@emotion/react" {
             cardText: string
             cardStarting: string
             cardEnding: string
+            cardLink: string
         }
     }
 }

@@ -1,17 +1,20 @@
 import React from "react"
 import type { NextComponentType, NextPageContext } from "next"
-import { ItemDataType } from "../data"
+import { idsToNames, ItemDataType } from "../data"
 import { css, useTheme } from "@emotion/react"
 import Image from "next/image"
 import GradientTextAnimation from "./GradientTextAnimation"
 import _ from "lodash"
+import Link from "next/link"
+import LinkText from "./LinkText"
 
 interface Props {
     itemData: ItemDataType
+    replaceNameWithType?: boolean
 }
 
 const ItemCard: NextComponentType<NextPageContext, {}, Props> = (
-    { itemData }
+    { itemData, replaceNameWithType }
 ) => {
     const theme = useTheme()
 
@@ -23,9 +26,13 @@ const ItemCard: NextComponentType<NextPageContext, {}, Props> = (
             border-radius: 0.5rem;
             text-align: center;
         `}>
-            <GradientTextAnimation css={css`
-                font-size: 1.25rem;
-            `} startingColor={theme.colors.cardStarting} endingColor={theme.colors.cardEnding} animationDuration={_.random(1, 2, true)}>{itemData.data.name}</GradientTextAnimation>
+            <Link href={`/item/${itemData.type}/${replaceNameWithType === true ? "" : itemData.ID}`} passHref>
+                <LinkText linkColor={theme.colors.cardLink}>
+                    <GradientTextAnimation css={css`
+                        font-size: 1.25rem;
+                    `} startingColor={theme.colors.cardStarting} endingColor={theme.colors.cardEnding} animationDuration={_.random(1, 2, true)}>{replaceNameWithType === true ? idsToNames.get(itemData.type) : itemData.data.name}</GradientTextAnimation>
+                </LinkText>
+            </Link>
             <br />
             <Image src={`https://cdn.prodigygame.com/game/assets/v1_cache/single-images/icon-${itemData.type}-${itemData.ID}/${itemData.metadata.vIcon ?? 0}/icon-${itemData.type}-${itemData.ID}.png`} alt={itemData.data.name} width={80} height={80} />
         </div>

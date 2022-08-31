@@ -36,7 +36,7 @@ const ItemPage: NextPage<Props> = ({ itemData }) => {
                     font-size: inherit;
                     vertical-align: baseline;
                 `}>
-                    These fossils are:
+                    These {itemName?.toLowerCase()} are:
                 </GradientTextAnimation>
             </p>
             <table css={css`
@@ -54,6 +54,7 @@ const ItemPage: NextPage<Props> = ({ itemData }) => {
                         <th><GradientTextAnimation startingColor="#008080" endingColor={theme.colors.text} animationDuration={2}>ID</GradientTextAnimation></th>
                         <th><GradientTextAnimation startingColor="#008080" endingColor={theme.colors.text} animationDuration={2}>Name</GradientTextAnimation></th>
                         <th><GradientTextAnimation startingColor="#008080" endingColor={theme.colors.text} animationDuration={2}>Description</GradientTextAnimation></th>
+                        {itemData.filter(item => Object.prototype.hasOwnProperty.call(item.data, "price")).length > 0 && <th><GradientTextAnimation startingColor="#008080" endingColor={theme.colors.text} animationDuration={2}>Price</GradientTextAnimation></th>}
                     </tr>
                 </thead>
                 <tbody>
@@ -72,9 +73,11 @@ const ItemPage: NextPage<Props> = ({ itemData }) => {
                                 padding-top: 1rem;
                                 padding-bottom: 1rem;
                             `}>{item.ID}</td>
-                            <td>{item.name}</td>
+                            <td>{item.data.name}</td>
                             { /* @ts-expect-error */ }
                             <td>{Object.prototype.hasOwnProperty.call(item.data, "flavorText") ? item.data.flavorText : item.data.description}</td>
+                            { /* @ts-expect-error */ }
+                            {item.data.price !== undefined && <td>{item.data.price}</td>}
                         </tr>
                     ))}
                 </tbody>

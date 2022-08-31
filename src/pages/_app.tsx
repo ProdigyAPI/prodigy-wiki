@@ -15,7 +15,8 @@ const lightTheme: Theme = {
         cardBackground: "#78ff78",
         cardText: "#FFFFFF",
         cardStarting: "#4368ef",
-        cardEnding: "#8800ff"
+        cardEnding: "#8800ff",
+        cardLink: "#107eb58f"
     }
 }
 
@@ -31,7 +32,8 @@ const darkTheme: Theme = {
         cardBackground: "#0b65a5",
         cardText: "#FFFFFF",
         cardStarting: "#43e4ef",
-        cardEnding: "#00b0ff"
+        cardEnding: "#00b0ff",
+        cardLink: "#b5109a8f"
     }
 }
 

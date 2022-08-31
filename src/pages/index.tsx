@@ -29,12 +29,10 @@ const Index: NextPage<Props> = ({ cards }) => {
                     display: grid;
                     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
                     gap: 0.5rem;
-                    margin-top: 0.5rem;
-                    margin-left: 0.5rem;
-                    margin-right: 0.5rem;
+                    margin: 0.5rem;
                 `}>
                 {cards.map(card => (
-                    <ItemCard itemData={card} key={card.ID} />
+                    <ItemCard itemData={card} key={card.ID} replaceNameWithType={true} />
                 ))}
             </div>
         </div>
