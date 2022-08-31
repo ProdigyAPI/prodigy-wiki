@@ -1,6 +1,9 @@
 /** @type {import("next").NextConfig} */
 const nextConfig = {
-    swcMinify: true
+    swcMinify: true,
+    images: {
+        domains: [ "cdn.prodigygame.com" ],
+    }
 }
 
 module.exports = nextConfig

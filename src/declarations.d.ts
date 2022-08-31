@@ -10,6 +10,10 @@ declare module "@emotion/react" {
             megaMenuBackground: string
             megaMenuText: string
             tabelEvenBackground: string
+            cardBackground: string
+            cardText: string
+            cardStarting: string
+            cardEnding: string
         }
     }
 }

@@ -11,7 +11,11 @@ const lightTheme: Theme = {
         navigationBarText: "#fff",
         megaMenuBackground: "#6988f8",
         megaMenuText: "#fff",
-        tabelEvenBackground: "#F3F4F6"
+        tabelEvenBackground: "#F3F4F6",
+        cardBackground: "#78ff78",
+        cardText: "#FFFFFF",
+        cardStarting: "#4368ef",
+        cardEnding: "#8800ff"
     }
 }
 
@@ -23,7 +27,11 @@ const darkTheme: Theme = {
         navigationBarText: "#fff",
         megaMenuBackground: "#6988f8",
         megaMenuText: "#fff",
-        tabelEvenBackground: "#1F2937"
+        tabelEvenBackground: "#1F2937",
+        cardBackground: "#0b65a5",
+        cardText: "#FFFFFF",
+        cardStarting: "#43e4ef",
+        cardEnding: "#00b0ff"
     }
 }
 

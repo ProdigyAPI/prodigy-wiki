@@ -1,6 +1,6 @@
 import React from "react"
 import type { GetStaticPaths, GetStaticProps, NextPage } from "next"
-import { ids, idsToNames } from "../../data"
+import { ids, idsToNames, ItemDataTypeArray } from "../../data"
 import { getGameData } from "prodigy-api"
 import { GameData } from "prodigy-api/lib/GameData"
 import { useRouter } from "next/router"
@@ -10,7 +10,7 @@ import { css, useTheme } from "@emotion/react"
 import Head from "next/head"
 
 interface Props {
-    itemData: GameData["boots"] & GameData["follow"] & GameData["fossil"] & GameData["hat"] & GameData["item"] & GameData["key"] & GameData["mathTownFrame"] & GameData["mathTownInterior"] & GameData["mount"] & GameData["outfit"] & GameData["spellRelic"] & GameData["weapon"] & GameData["currency"]
+    itemData: ItemDataTypeArray
 }
 
 const ItemPage: NextPage<Props> = ({ itemData }) => {
@@ -73,7 +73,8 @@ const ItemPage: NextPage<Props> = ({ itemData }) => {
                                 padding-bottom: 1rem;
                             `}>{item.ID}</td>
                             <td>{item.name}</td>
-                            <td>{item.data.flavorText}</td>
+                            { /* @ts-expect-error */ }
+                            <td>{Object.prototype.hasOwnProperty.call(item.data, "flavorText") ? item.data.flavorText : item.data.description}</td>
                         </tr>
                     ))}
                 </tbody>
@@ -89,9 +90,9 @@ export const getStaticProps: GetStaticProps = async context => {
 
     return {
         props: {
-            itemData: gameData[context.params?.item as keyof GameData] as GameData["boots"] & GameData["follow"] & GameData["fossil"] & GameData["hat"] & GameData["item"] & GameData["key"] & GameData["mathTownFrame"] & GameData["mathTownInterior"] & GameData["mount"] & GameData["outfit"] & GameData["spellRelic"] & GameData["weapon"] & GameData["currency"]
+            itemData: gameData[context.params?.item as keyof GameData] as ItemDataTypeArray
         },
-        revalidate: 60
+        revalidate: 600
     }
 }
 
