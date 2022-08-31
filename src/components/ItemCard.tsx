@@ -27,7 +27,7 @@ const ItemCard: NextComponentType<NextPageContext, {}, Props> = (
                 font-size: 1.25rem;
             `} startingColor={theme.colors.cardStarting} endingColor={theme.colors.cardEnding} animationDuration={_.random(1, 2, true)}>{itemData.data.name}</GradientTextAnimation>
             <br />
-            <Image src={`https://cdn.prodigygame.com/game/assets/v1_cache/single-images/icon-${itemData.type}-${itemData.ID}/${itemData.metadata.vIcon}/icon-${itemData.type}-${itemData.ID}.png`} alt={itemData.data.name} width={80} height={80} />
+            <Image src={`https://cdn.prodigygame.com/game/assets/v1_cache/single-images/icon-${itemData.type}-${itemData.ID}/${itemData.metadata.vIcon ?? 0}/icon-${itemData.type}-${itemData.ID}.png`} alt={itemData.data.name} width={80} height={80} />
         </div>
         // <div class="p-4 md:w-1/3">
         //     <div class="h-full border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden">
