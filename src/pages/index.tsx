@@ -25,6 +25,20 @@ const Index: NextPage<Props> = ({ cards }) => {
             <Header>
                 <GradientTextAnimation startingColor="#008080" endingColor={theme.colors.text}>Prodigy Wiki</GradientTextAnimation>
             </Header>
+            <div dangerouslySetInnerHTML={{
+                __html: `<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8981394123170949"
+                crossorigin="anonymous"></script>
+           <!-- Home Page Ads -->
+           <ins class="adsbygoogle"
+                style="display:block"
+                data-ad-client="ca-pub-8981394123170949"
+                data-ad-slot="9471523421"
+                data-ad-format="auto"
+                data-full-width-responsive="true"></ins>
+           <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+           </script>`
+            }}/>
             <Header css={css`
                 font-size: 2rem;
             `}>
@@ -37,7 +51,7 @@ const Index: NextPage<Props> = ({ cards }) => {
                     margin: 0.5rem;
                 `}>
                 {cards.map(card => (
-                    <ItemCard itemData={card} key={card.ID} replaceNameWithType={true} />
+                    <ItemCard itemData={card} key={`${card.type}-${card.ID}`} replaceNameWithType={true} />
                 ))}
             </div>
         </div>

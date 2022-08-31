@@ -85,6 +85,7 @@ const NavigationBar: NextComponentType<NextPageContext, {}, Props> = ({ isDarkMo
                         color: ${theme.colors.megaMenuText};
                         border-radius: 1rem;
                         padding: 0;
+                        z-index: 100;
                         @media (min-width: 768px) {
                             left: 10%;
                             grid-template-columns: repeat(2, minmax(0, 1fr));
