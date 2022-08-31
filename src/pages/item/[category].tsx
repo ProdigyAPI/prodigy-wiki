@@ -1,7 +1,7 @@
 import React from "react"
 import type { GetStaticPaths, GetStaticProps, NextPage } from "next"
 import { ids, idsToNames, ItemDataTypeArray } from "../../data"
-import { getGameData } from "prodigy-api"
+import { getCachedGameData } from "../../gameDataHandler"
 import { GameData } from "prodigy-api/lib/GameData"
 import { useRouter } from "next/router"
 import Header from "../../components/Header"
@@ -97,7 +97,7 @@ const ItemPage: NextPage<Props> = ({ itemData }) => {
 export default ItemPage
 
 export const getStaticProps: GetStaticProps = async context => {
-    const gameData = await getGameData()
+    const gameData = await getCachedGameData()
 
     return {
         props: {

@@ -1,14 +1,15 @@
 import React from "react"
 import type { GetStaticPaths, GetStaticProps, NextPage } from "next"
 import Head from "next/head"
-import { ItemDataType } from "../../../data"
-import { getGameData } from "prodigy-api"
+import { ids, ItemDataType } from "../../../data"
+import { getCachedGameData } from "../../../gameDataHandler"
 import { GameData } from "prodigy-api/lib/GameData"
 import Header from "../../../components/Header"
 import GradientTextAnimation from "../../../components/GradientTextAnimation"
 import { css, useTheme } from "@emotion/react"
 import { format, utcToZonedTime } from "date-fns-tz"
 import Image from "next/image"
+import _ from "lodash"
 
 interface Props {
     itemData: ItemDataType
@@ -54,7 +55,7 @@ const ItemDataPage: NextPage<Props> = ({ itemData }) => {
 export default ItemDataPage
 
 export const getStaticProps: GetStaticProps = async context => {
-    const gameData = await getGameData()
+    const gameData = await getCachedGameData()
 
     return {
         props: {
@@ -66,8 +67,19 @@ export const getStaticProps: GetStaticProps = async context => {
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
+    const gameData = await getCachedGameData()
+
     return {
-        paths: [],
+        paths: _.flatten(ids.map(id => {
+            return gameData[id as keyof GameData].map(item => {
+                return {
+                    params: {
+                        category: id,
+                        itemID: item.ID?.toString() ?? ""
+                    }
+                }
+            })
+        })),
         fallback: "blocking"
     }
 }

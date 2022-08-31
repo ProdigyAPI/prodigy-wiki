@@ -4,9 +4,9 @@ import { css, useTheme } from "@emotion/react"
 import GradientTextAnimation from "../components/GradientTextAnimation"
 import Header from "../components/Header"
 import Head from "next/head"
-import { getGameData } from "prodigy-api"
 import _ from "lodash"
 import { ItemDataType, itemsIds } from "../data"
+import { getCachedGameData } from "../gameDataHandler"
 import { GameData } from "prodigy-api/lib/GameData"
 import ItemCard from "../components/ItemCard"
 
@@ -47,7 +47,7 @@ const Index: NextPage<Props> = ({ cards }) => {
 export default Index
 
 export const getStaticProps: GetStaticProps = async context => {
-    const gameData = await getGameData()
+    const gameData = await getCachedGameData()
 
     return {
         props: {
