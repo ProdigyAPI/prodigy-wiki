@@ -27,7 +27,7 @@ const ItemCard: NextComponentType<NextPageContext, {}, Props> = (
             text-align: center;
         `}>
             <Link href={`/item/${itemData.type}/${replaceNameWithType === true ? "" : itemData.ID}`} passHref>
-                <LinkText linkColor={theme.colors.cardLink}>
+                <LinkText linkColor={theme.colors.cardLink} backgroundSize={2}>
                     <GradientTextAnimation css={css`
                         font-size: 1.25rem;
                     `} startingColor={theme.colors.cardStarting} endingColor={theme.colors.cardEnding} animationDuration={_.random(1, 2, true)}>{replaceNameWithType === true ? idsToNames.get(itemData.type) : itemData.data.name}</GradientTextAnimation>
