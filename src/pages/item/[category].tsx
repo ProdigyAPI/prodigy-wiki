@@ -8,6 +8,8 @@ import Header from "../../components/Header"
 import GradientTextAnimation from "../../components/GradientTextAnimation"
 import { css, useTheme } from "@emotion/react"
 import Head from "next/head"
+import Link from "next/link"
+import LinkText from "../../components/LinkText"
 
 interface Props {
     itemData: ItemDataTypeArray
@@ -16,7 +18,7 @@ interface Props {
 const ItemPage: NextPage<Props> = ({ itemData }) => {
     const router = useRouter()
     const theme = useTheme()
-    const itemId = router.query.item as string
+    const itemId = router.query.category as string
     const itemName = idsToNames.get(itemId)
 
     return (
@@ -73,7 +75,13 @@ const ItemPage: NextPage<Props> = ({ itemData }) => {
                                 padding-top: 1rem;
                                 padding-bottom: 1rem;
                             `}>{item.ID}</td>
-                            <td>{item.data.name}</td>
+                            <td>
+                                <Link href={`/item/${itemId}/${item.ID}`} passHref>
+                                    <LinkText>
+                                        {item.data.name}
+                                    </LinkText>
+                                </Link>
+                            </td>
                             { /* @ts-expect-error */ }
                             <td>{Object.prototype.hasOwnProperty.call(item.data, "flavorText") ? item.data.flavorText : item.data.description}</td>
                             { /* @ts-expect-error */ }
@@ -93,7 +101,7 @@ export const getStaticProps: GetStaticProps = async context => {
 
     return {
         props: {
-            itemData: gameData[context.params?.item as keyof GameData] as ItemDataTypeArray
+            itemData: gameData[context.params?.category as keyof GameData] as ItemDataTypeArray
         },
         revalidate: 600
     }
@@ -101,7 +109,7 @@ export const getStaticProps: GetStaticProps = async context => {
 
 export const getStaticPaths: GetStaticPaths = async () => {
     return {
-        paths: ids.map(id => ({ params: { item: id } })),
+        paths: ids.map(id => ({ params: { category: id } })),
         fallback: "blocking"
     }
 }

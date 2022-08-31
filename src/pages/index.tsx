@@ -25,6 +25,11 @@ const Index: NextPage<Props> = ({ cards }) => {
             <Header>
                 <GradientTextAnimation startingColor="#008080" endingColor={theme.colors.text}>Prodigy Wiki</GradientTextAnimation>
             </Header>
+            <Header css={css`
+                font-size: 2rem;
+            `}>
+                Items
+            </Header>
             <div css={css`
                     display: grid;
                     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));

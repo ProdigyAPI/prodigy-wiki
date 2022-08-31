@@ -18,6 +18,8 @@ const MainDocument = (): JSX.Element => {
                         gtag('config', 'G-77D52LPYJ9');
                     `}
                 </Script>
+                <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8981394123170949"
+                    crossOrigin="anonymous"></script>
             </Head>
             <body>
                 <Main />
