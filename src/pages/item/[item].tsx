@@ -7,6 +7,7 @@ import { useRouter } from "next/router"
 import Header from "../../components/Header"
 import GradientTextAnimation from "../../components/GradientTextAnimation"
 import { css, useTheme } from "@emotion/react"
+import Head from "next/head"
 
 interface Props {
     itemData: GameData["boots"] & GameData["follow"] & GameData["fossil"] & GameData["hat"] & GameData["item"] & GameData["key"] & GameData["mathTownFrame"] & GameData["mathTownInterior"] & GameData["mount"] & GameData["outfit"] & GameData["spellRelic"] & GameData["weapon"] & GameData["currency"]
@@ -20,13 +21,16 @@ const ItemPage: NextPage<Props> = ({ itemData }) => {
 
     return (
         <div>
+            <Head>
+                <title>{itemName} - Prodigy Wiki</title>
+            </Head>
             <Header>
                 <GradientTextAnimation startingColor="#008080" endingColor={theme.colors.text} animationDuration={2}>{itemName}</GradientTextAnimation>
             </Header>
             <p css={css`
                 text-align: center;
             `}>
-                Currently prodigy has {itemData.length} {itemName}.
+                Currently, prodigy has {itemData.length} {itemName}.
                 <GradientTextAnimation startingColor="#008080" endingColor={theme.colors.text} animationDuration={2} css={css`
                     margin-left: 1rem;
                     font-size: inherit;

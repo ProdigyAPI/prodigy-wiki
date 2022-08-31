@@ -129,7 +129,7 @@ const NavigationBar: NextComponentType<NextPageContext, {}, Props> = ({ isDarkMo
                     border: none;
                 `} onClick={() => {
                     setIsDarkMode(!isDarkMode)
-                }}>
+                }} title={"Toggle Dark Mode"}>
                     <DarkModeTag css={css`
                         color: ${theme.colors.navigationBarText};
                         font-size: 1.5rem;  
