@@ -58,10 +58,10 @@ const ItemDataPage: NextPage<Props> = ({ itemData, assetUrl, effects }) => {
                     `}>Effects</GradientTextAnimation>
                 </h2>
                 <p css={centerText}>
-                    This item has the following effects: {effects.map(effect => <>
+                    This item has the following effects: {effects.map((effect, index) => <>
                         <span css={css`
                             color: ${theme.colors.text};
-                        `}>{effect.data.name}</span>
+                        `}>{index > 0 ? "," : ""} {effect.data.name}</span>
                     </>)}
                 </p>
             </>}
@@ -92,6 +92,9 @@ export const getStaticProps: GetStaticProps = async context => {
     if (itemData.data.effects instanceof Array) {
         // @ts-expect-error
         for (let effect of itemData.data.effects) {
+            if (effect instanceof Array) {
+                effect = effect[0]
+            }
             if (typeof effect === "string") {
                 effect = parseInt(effect)
             }
