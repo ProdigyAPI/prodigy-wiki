@@ -3,7 +3,7 @@ import type { GetStaticPaths, GetStaticProps, NextPage } from "next"
 import Head from "next/head"
 import { dateToText, ids, ItemDataType } from "../../../data"
 import { getCachedGameData } from "../../../gameDataHandler"
-import { GameData, GameDataItem } from "prodigy-api/lib/GameData"
+import { GameData, GameDataItem, AffixElement } from "prodigy-api/lib/GameData"
 import Header from "../../../components/Header"
 import GradientTextAnimation from "../../../components/GradientTextAnimation"
 import { css, useTheme } from "@emotion/react"
@@ -13,15 +13,22 @@ import _ from "lodash"
 interface Props {
     itemData: ItemDataType
     assetUrl: string
+    effects: AffixElement[]
 }
 
-const ItemDataPage: NextPage<Props> = ({ itemData, assetUrl }) => {
+const ItemDataPage: NextPage<Props> = ({ itemData, assetUrl, effects }) => {
     const theme = useTheme()
 
     const centerText = css`
         text-align: center;   
         margin-left: 1rem;
         margin-right: 1rem;             
+    `
+
+    const headerTwo = css`
+        ${centerText}
+        font-size: 2rem;
+        margin: 0;
     `
 
     return (
@@ -44,6 +51,20 @@ const ItemDataPage: NextPage<Props> = ({ itemData, assetUrl }) => {
                     {" "} The {itemData.data.name} is {itemData.data.member === 0 ? "not" : ""} member only.
                 </>}
             </p>
+            {effects.length > 0 && <>
+                <h2 css={headerTwo}>
+                    <GradientTextAnimation startingColor="#008080" endingColor={theme.colors.text} animationDuration={2} css={css`
+                        font-size: inherit;
+                    `}>Effects</GradientTextAnimation>
+                </h2>
+                <p css={centerText}>
+                    This item has the following effects: {effects.map(effect => <>
+                        <span css={css`
+                            color: ${theme.colors.text};
+                        `}>{effect.data.name}</span>
+                    </>)}
+                </p>
+            </>}
         </div>
     )
 }
@@ -66,10 +87,23 @@ export const getStaticProps: GetStaticProps = async context => {
 
     const assetUrl = `https://cdn.prodigygame.com/game/assets/v1_cache/single-images/icon-${itemDataForAsset.type}-${itemDataForAsset.ID}/${itemDataForAsset.metadata.vIcon ?? 0}/icon-${itemDataForAsset.type}-${itemDataForAsset.ID}.png`
 
+    const effects: AffixElement[] = []
+    // @ts-expect-error
+    if (itemData.data.effects instanceof Array) {
+        // @ts-expect-error
+        for (let effect of itemData.data.effects) {
+            if (typeof effect === "string") {
+                effect = parseInt(effect)
+            }
+            effects.push(gameData.affix.find(e => e.ID === effect) as AffixElement)
+        }
+    }
+
     return {
         props: {
             itemData,
-            assetUrl
+            assetUrl,
+            effects
         },
         revalidate: 6000
     }
