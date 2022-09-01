@@ -41,55 +41,62 @@ const ItemPage: NextPage<Props> = ({ itemData }) => {
                     These {itemName?.toLowerCase()} are:
                 </GradientTextAnimation>
             </p>
-            <table css={css`
-                width: 90%;
-                left: 5%;
-                position: relative;
-                border-collapse: collapse;
-                text-align: center;
-                margin-bottom: 1rem;
+            <div css={css`
+                overflow-x: auto;
             `}>
-                <thead css={css`
-                    border: 1px solid #e5e7eb;
+                <table css={css`
+                    width: 100%;
+                    @media (min-width: 768px) {
+                        width: 90%;
+                        left: 5%;
+                    }
+                    position: relative;
+                    border-collapse: collapse;
+                    text-align: center;
+                    margin-bottom: 1rem;
                 `}>
-                    <tr>
-                        <th><GradientTextAnimation startingColor="#008080" endingColor={theme.colors.text} animationDuration={2}>ID</GradientTextAnimation></th>
-                        <th><GradientTextAnimation startingColor="#008080" endingColor={theme.colors.text} animationDuration={2}>Name</GradientTextAnimation></th>
-                        <th><GradientTextAnimation startingColor="#008080" endingColor={theme.colors.text} animationDuration={2}>Description</GradientTextAnimation></th>
-                        {itemData.filter(item => Object.prototype.hasOwnProperty.call(item.data, "price")).length > 0 && <th><GradientTextAnimation startingColor="#008080" endingColor={theme.colors.text} animationDuration={2}>Price</GradientTextAnimation></th>}
-                    </tr>
-                </thead>
-                <tbody>
-                    {itemData.map(item => (
-                        <tr key={item.ID} css={css`
-                            border-bottom: 1px solid #e5e7eb;
-                            border-left: 1px solid #e5e7eb;
-                            border-right: 1px solid #e5e7eb;
-                            &:nth-child(odd) {
-                                background-color: ${theme.colors.tabelEvenBackground};
-                            }
-                        `}>
-                            <td css={css`
-                                padding-left: 1.5rem;
-                                padding-right: 1.5rem;
-                                padding-top: 1rem;
-                                padding-bottom: 1rem;
-                            `}>{item.ID}</td>
-                            <td>
-                                <Link href={`/item/${itemId}/${item.ID}`} passHref>
-                                    <LinkText>
-                                        {item.data.name}
-                                    </LinkText>
-                                </Link>
-                            </td>
-                            { /* @ts-expect-error */ }
-                            <td>{Object.prototype.hasOwnProperty.call(item.data, "flavorText") ? item.data.flavorText : item.data.description}</td>
-                            { /* @ts-expect-error */ }
-                            {item.data.price !== undefined && <td>{item.data.price}</td>}
+                    <thead css={css`
+                        border: 1px solid #e5e7eb;
+                    `}>
+                        <tr>
+                            <th><GradientTextAnimation startingColor="#008080" endingColor={theme.colors.text} animationDuration={2}>ID</GradientTextAnimation></th>
+                            <th><GradientTextAnimation startingColor="#008080" endingColor={theme.colors.text} animationDuration={2}>Name</GradientTextAnimation></th>
+                            <th><GradientTextAnimation startingColor="#008080" endingColor={theme.colors.text} animationDuration={2}>Description</GradientTextAnimation></th>
+                            {itemData.filter(item => Object.prototype.hasOwnProperty.call(item.data, "price")).length > 0 && <th><GradientTextAnimation startingColor="#008080" endingColor={theme.colors.text} animationDuration={2}>Price</GradientTextAnimation></th>}
                         </tr>
-                    ))}
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        {itemData.map(item => (
+                            <tr key={item.ID} css={css`
+                                border-bottom: 1px solid #e5e7eb;
+                                border-left: 1px solid #e5e7eb;
+                                border-right: 1px solid #e5e7eb;
+                                &:nth-child(odd) {
+                                    background-color: ${theme.colors.tabelEvenBackground};
+                                }
+                            `}>
+                                <td css={css`
+                                    padding-left: 1.5rem;
+                                    padding-right: 1.5rem;
+                                    padding-top: 1rem;
+                                    padding-bottom: 1rem;
+                                `}>{item.ID}</td>
+                                <td>
+                                    <Link href={`/item/${itemId}/${item.ID}`} passHref>
+                                        <LinkText>
+                                            {item.data.name}
+                                        </LinkText>
+                                    </Link>
+                                </td>
+                                { /* @ts-expect-error */ }
+                                <td>{Object.prototype.hasOwnProperty.call(item.data, "flavorText") ? item.data.flavorText : item.data.description}</td>
+                                { /* @ts-expect-error */ }
+                                {item.data.price !== undefined && <td>{item.data.price}</td>}
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+            </div>
         </div>
     )
 }
