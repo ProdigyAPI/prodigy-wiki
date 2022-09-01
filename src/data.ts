@@ -19,3 +19,11 @@ export const dateToText = (date: Date): string => {
         timeZone
     })
 }
+
+export const Rarity = {
+    0: "very common",
+    1: "common",
+    2: "uncommon",
+    3: "rare",
+    4: "very rare"
+}

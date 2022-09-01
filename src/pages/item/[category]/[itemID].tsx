@@ -1,7 +1,7 @@
 import React from "react"
 import type { GetStaticPaths, GetStaticProps, NextPage } from "next"
 import Head from "next/head"
-import { dateToText, ids, ItemDataType } from "../../../data"
+import { dateToText, ids, ItemDataType, Rarity } from "../../../data"
 import { getCachedGameData } from "../../../gameDataHandler"
 import { GameData, GameDataItem, AffixElement } from "prodigy-api/lib/GameData"
 import Header from "../../../components/Header"
@@ -50,6 +50,10 @@ const ItemDataPage: NextPage<Props> = ({ itemData, assetUrl, effects }) => {
                     { /* @ts-expect-error */ }
                     {" "} The {itemData.data.name} is {itemData.data.member === 0 ? "not" : ""} member only.
                 </>}
+                {Object.prototype.hasOwnProperty.call(itemData.data, "rarity") && <>
+                    { /* @ts-expect-error */ }
+                    {" "} This item is {Rarity[itemData.data.rarity]}.
+                </>}
             </p>
             {effects.length > 0 && <>
                 <h2 css={headerTwo}>
@@ -61,7 +65,7 @@ const ItemDataPage: NextPage<Props> = ({ itemData, assetUrl, effects }) => {
                     This item has the following effects: {effects.map((effect, index) => <>
                         <span css={css`
                             color: ${theme.colors.text};
-                        `}>{index > 0 ? "," : ""} {effect.data.name}</span>
+                        `}>{index > 0 ? "," : ""} {effect.data.name} (Boost of {1 + (effect.data.valuePercent ?? 0)})</span>
                     </>)}
                 </p>
             </>}
