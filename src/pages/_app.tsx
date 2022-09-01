@@ -13,7 +13,7 @@ const lightTheme: Theme = {
         megaMenuText: "#fff",
         tabelEvenBackground: "#F3F4F6",
         cardBackground: "#78ff78",
-        cardText: "#FFFFFF",
+        cardText: "#000000",
         cardStarting: "#4368ef",
         cardEnding: "#8800ff",
         cardLink: "#107eb58f"

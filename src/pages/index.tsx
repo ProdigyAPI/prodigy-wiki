@@ -74,7 +74,7 @@ const Index: NextPage<Props> = ({ cards, recentItems, cardsAssetUrl, recentItems
             <Header css={css`
                 font-size: 2rem;
             `}>
-                Items Recently Added
+                Recently Added Items
             </Header>
             <div css={css`
                     display: grid;
