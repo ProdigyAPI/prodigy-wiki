@@ -5,16 +5,19 @@ import GradientTextAnimation from "../components/GradientTextAnimation"
 import Header from "../components/Header"
 import Head from "next/head"
 import _ from "lodash"
-import { ItemDataType, itemsIds } from "../data"
+import { ItemDataType, ItemDataTypeArray, itemsIds } from "../data"
 import { getCachedGameData } from "../gameDataHandler"
-import { GameData } from "prodigy-api/lib/GameData"
+import { GameData, GameDataItem } from "prodigy-api/lib/GameData"
 import ItemCard from "../components/ItemCard"
 
 interface Props {
-    cards: ItemDataType[]
+    cards: ItemDataTypeArray
+    recentItems: ItemDataTypeArray
+    cardsAssetUrl: string[]
+    recentItemsAssetUrl: string[]
 }
 
-const Index: NextPage<Props> = ({ cards }) => {
+const Index: NextPage<Props> = ({ cards, recentItems, cardsAssetUrl, recentItemsAssetUrl }) => {
     const theme = useTheme()
 
     return (
@@ -50,8 +53,8 @@ const Index: NextPage<Props> = ({ cards }) => {
                     gap: 0.5rem;
                     margin: 0.5rem;
                 `}>
-                {cards.map(card => (
-                    <ItemCard itemData={card} key={`${card.type}-${card.ID}`} replaceNameWithType={true} />
+                {cards.map((card, index) => (
+                    <ItemCard itemData={card} key={`${card.type}-${card.ID}`} replaceNameWithType={true} assetUrl={cardsAssetUrl[index]} />
                 ))}
             </div>
             <div dangerouslySetInnerHTML={{
@@ -68,6 +71,21 @@ const Index: NextPage<Props> = ({ cards }) => {
                 (adsbygoogle = window.adsbygoogle || []).push({});
            </script>`
             }}/>
+            <Header css={css`
+                font-size: 2rem;
+            `}>
+                Items Recently Added
+            </Header>
+            <div css={css`
+                    display: grid;
+                    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                    gap: 0.5rem;
+                    margin: 0.5rem;
+                `}>
+                {recentItems.map((card, index) => (
+                    <ItemCard itemData={card} key={`${card.type}-${card.ID}`} showCreationDate={true} assetUrl={recentItemsAssetUrl[index]} />
+                ))}
+            </div>
         </div>
     )
 }
@@ -76,12 +94,45 @@ export default Index
 
 export const getStaticProps: GetStaticProps = async context => {
     const gameData = await getCachedGameData()
+    const cards = _.map(itemsIds, id => {
+        return _.sample(gameData[id as keyof GameData]) as ItemDataType
+    })
+    const recentItems = _.sortBy(_.map(itemsIds, id => {
+        return gameData[id as keyof GameData]
+    }).flat(), e => e.createDate).reverse().slice(0, 10)
+
+    const cardsAssetUrl = _.map(cards, card => {
+        let itemDataForAsset = card
+        if (card.type === "item") {
+            const transform = (card as GameDataItem).data.effect?.transform
+            if (transform !== undefined) {
+                // @ts-expect-error
+                itemDataForAsset = gameData[transform].find((e: ItemDataType) => e.ID === (card as GameDataItem).data.effect?.ID) as ItemDataType
+            }
+        }
+
+        return `https://cdn.prodigygame.com/game/assets/v1_cache/single-images/icon-${itemDataForAsset.type}-${itemDataForAsset.ID}/${itemDataForAsset.metadata.vIcon ?? 0}/icon-${itemDataForAsset.type}-${itemDataForAsset.ID}.png`
+    })
+    const recentItemsAssetUrl = _.map(recentItems, card => {
+        let itemDataForAsset = card
+        if (card.type === "item") {
+            const transform = (card as GameDataItem).data.effect?.transform
+            if (transform !== undefined) {
+                // @ts-expect-error
+                itemDataForAsset = gameData[transform].find((e: ItemDataType) => e.ID === (card as GameDataItem).data.effect?.ID) as ItemDataType
+            }
+        }
+
+        // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
+        return `https://cdn.prodigygame.com/game/assets/v1_cache/single-images/icon-${itemDataForAsset.type}-${itemDataForAsset.ID}/${itemDataForAsset.metadata.vIcon ?? 0}/icon-${itemDataForAsset.type}-${itemDataForAsset.ID}.png`
+    })
 
     return {
         props: {
-            cards: _.map(itemsIds, id => {
-                return _.sample(gameData[id as keyof GameData]) as ItemDataType
-            })
+            cards,
+            recentItems,
+            cardsAssetUrl,
+            recentItemsAssetUrl
         },
         revalidate: 60
     }
