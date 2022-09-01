@@ -74,7 +74,7 @@ const NavigationBar: NextComponentType<NextPageContext, {}, Props> = ({ isDarkMo
                             filter: brightness(85%);
                         }
                     `}>
-                        Items
+                        Categories
                     </a>
                     <div className="mega-menu" css={css`
                         display: grid;
