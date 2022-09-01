@@ -114,7 +114,7 @@ export const getStaticProps: GetStaticProps = async context => {
         return `https://cdn.prodigygame.com/game/assets/v1_cache/single-images/icon-${itemDataForAsset.type}-${itemDataForAsset.ID}/${itemDataForAsset.metadata.vIcon ?? 0}/icon-${itemDataForAsset.type}-${itemDataForAsset.ID}.png`
     })
     const recentItemsAssetUrl = _.map(recentItems, card => {
-        let itemDataForAsset = card
+        let itemDataForAsset: ItemDataType = card as ItemDataType
         if (card.type === "item") {
             const transform = (card as GameDataItem).data.effect?.transform
             if (transform !== undefined) {
@@ -124,7 +124,7 @@ export const getStaticProps: GetStaticProps = async context => {
         }
 
         // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
-        return `https://cdn.prodigygame.com/game/assets/v1_cache/single-images/icon-${itemDataForAsset.type}-${itemDataForAsset.ID}/${itemDataForAsset.metadata.vIcon ?? 0}/icon-${itemDataForAsset.type}-${itemDataForAsset.ID}.png`
+        return `https://cdn.prodigygame.com/game/assets/v1_cache/single-images/icon-${itemDataForAsset.type}-${itemDataForAsset.ID}/${itemDataForAsset.metadata?.vIcon ?? 0}/icon-${itemDataForAsset.type}-${itemDataForAsset.ID}.png`
     })
 
     return {
