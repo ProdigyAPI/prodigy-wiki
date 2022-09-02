@@ -5,6 +5,8 @@ const MainDocument = (): JSX.Element => {
     return (
         <Html lang="en">
             <Head>
+                <meta name="theme-color" content="#524CFD" />
+                <meta name="twitter:image" content="/prodigy-wiki-icon.png" />
                 <Script
                     src="https://www.googletagmanager.com/gtag/js?id=G-77D52LPYJ9"
                     strategy="afterInteractive"
