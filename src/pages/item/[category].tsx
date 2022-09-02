@@ -25,8 +25,9 @@ const ItemPage: NextPage<Props> = ({ itemData }) => {
         <div>
             <Head>
                 <title>{itemName} - Prodigy Wiki</title>
+                <meta name="og:title" content={`${itemName as string} - Prodigy Wiki`} />
                 <meta name="description" content={`A bunch of information about ${itemName as string} in the math game Prodigy.`} />
-                <meta name="twitter:description" content={`A bunch of information about ${itemName as string} in the math game Prodigy.`} />
+                <meta name="og:description" content={`A bunch of information about ${itemName as string} in the math game Prodigy.`} />
             </Head>
             <Header>
                 <GradientTextAnimation startingColor="#008080" endingColor={theme.colors.text} animationDuration={2}>{itemName}</GradientTextAnimation>

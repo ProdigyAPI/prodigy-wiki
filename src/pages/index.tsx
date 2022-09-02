@@ -24,8 +24,9 @@ const Index: NextPage<Props> = ({ cards, recentItems, cardsAssetUrl, recentItems
         <div>
             <Head>
                 <title>Prodigy Wiki</title>
+                <meta name="og:title" content="Prodigy Wiki" />
                 <meta name="description" content="A bunch of information about the math game Prodigy." />
-                <meta name="twitter:description" content="A bunch of information about the math game Prodigy." />
+                <meta name="og:description" content="A bunch of information about the math game Prodigy." />
             </Head>
             <Header>
                 <GradientTextAnimation startingColor="#008080" endingColor={theme.colors.text}>Prodigy Wiki</GradientTextAnimation>
