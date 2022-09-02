@@ -54,9 +54,9 @@ const ItemDataPage: NextPage<Props> = ({ itemData, assetUrl, effects }) => {
                     { /* @ts-expect-error */ }
                     {" "} This item is {Rarity[itemData.data.rarity]}.
                 </>}
-                {Object.prototype.hasOwnProperty.call(itemData.data, "cost") && <>
+                {Object.prototype.hasOwnProperty.call(itemData.data, "price") && <>
                     { /* @ts-expect-error */ }
-                    {" "} This item costs {itemData.data.cost} gold.
+                    {" "} This item costs {itemData.data.price} gold.
                 </>}
             </p>
             {effects.length > 0 && <>
