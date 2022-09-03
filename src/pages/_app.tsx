@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react"
 import type { AppProps } from "next/app"
 import { Global, css, ThemeProvider, Theme } from "@emotion/react"
 import NavigationBar from "../components/NavigationBar"
+import { useRouter } from "next/router"
 
 const lightTheme: Theme = {
     colors: {
@@ -38,12 +39,16 @@ const darkTheme: Theme = {
 }
 
 const App = ({ Component, pageProps }: AppProps): JSX.Element => {
+    const router = useRouter()
     const [isDarkMode, setIsDarkMode] = useState(false)
     const theme = isDarkMode ? darkTheme : lightTheme
 
     useEffect(() => {
         const localStorageTheme = localStorage.getItem("prodigy-wiki-dark-mode")
         setIsDarkMode(localStorageTheme === "true")
+    }, [])
+
+    useEffect(() => {
         void (async () => {
             // @ts-expect-error
             window.Tablesort = (await import("tablesort")).default
@@ -52,7 +57,7 @@ const App = ({ Component, pageProps }: AppProps): JSX.Element => {
             // @ts-expect-error
             document.querySelectorAll("table").forEach(table => window.Tablesort(table))
         })()
-    }, [])
+    }, [router.asPath])
 
     useEffect(() => {
         localStorage.setItem("prodigy-wiki-dark-mode", isDarkMode.toString())

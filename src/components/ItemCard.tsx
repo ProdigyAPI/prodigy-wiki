@@ -7,16 +7,18 @@ import GradientTextAnimation from "./GradientTextAnimation"
 import _ from "lodash"
 import Link from "next/link"
 import LinkText from "./LinkText"
+import { GameDataPet } from "prodigy-api/lib/GameData"
 
 interface Props {
-    itemData: ItemDataType
+    itemData: ItemDataType | GameDataPet
     replaceNameWithType?: boolean
     showCreationDate?: boolean
     assetUrl?: string
+    customUrl?: string
 }
 
 const ItemCard: NextComponentType<NextPageContext, {}, Props> = (
-    { itemData, replaceNameWithType = false, showCreationDate = false, assetUrl = "" }
+    { itemData, replaceNameWithType = false, showCreationDate = false, assetUrl = "", customUrl = "" }
 ) => {
     const theme = useTheme()
 
@@ -28,7 +30,7 @@ const ItemCard: NextComponentType<NextPageContext, {}, Props> = (
             border-radius: 0.5rem;
             text-align: center;
         `}>
-            <Link href={`/item/${itemData.type}/${replaceNameWithType ? "" : itemData.ID}`} passHref>
+            <Link href={customUrl === "" ? `/item/${itemData.type}/${replaceNameWithType ? "" : itemData.ID}` : customUrl} passHref>
                 <LinkText linkColor={theme.colors.cardLink} backgroundSize={2}>
                     <GradientTextAnimation css={css`
                         font-size: 1.25rem;

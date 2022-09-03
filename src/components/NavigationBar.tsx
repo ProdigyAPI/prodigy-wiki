@@ -16,6 +16,20 @@ const NavigationBar: NextComponentType<NextPageContext, {}, Props> = ({ isDarkMo
     const theme = useTheme()
     const DarkModeTag = isDarkMode ? MdBrightness4 : MdBrightness7
 
+    const linkButton = css`
+        display: inline-block;
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+        padding-bottom: 0.5rem;
+        padding-top: 0.5rem;
+        border-radius: 0.5rem;
+        margin-right: 0.5rem;
+        background-color: ${theme.colors.megaMenuBackground};
+        &:hover {
+            filter: brightness(85%);
+        }
+    `
+
     return (
         <nav css={css`
             display: flex;
@@ -62,18 +76,7 @@ const NavigationBar: NextComponentType<NextPageContext, {}, Props> = ({ isDarkMo
                         }
                     }
                 `}>
-                    <a href="#" css={css`
-                        display: inline-block;
-                        padding-left: 1.5rem;
-                        padding-right: 1.5rem;
-                        padding-bottom: 0.5rem;
-                        padding-top: 0.5rem;
-                        border-radius: 0.5rem;
-                        background-color: ${theme.colors.megaMenuBackground};
-                        &:hover {
-                            filter: brightness(85%);
-                        }
-                    `}>
+                    <a href="#" css={linkButton}>
                         Categories
                     </a>
                     <div className="mega-menu" css={css`
@@ -115,6 +118,11 @@ const NavigationBar: NextComponentType<NextPageContext, {}, Props> = ({ isDarkMo
                         ))}
                     </div>
                 </div>
+                <Link href="/pets" passHref>
+                    <a css={linkButton}>
+                        Pets
+                    </a>
+                </Link>
             </div>
             <div css={css`
                 display: flex;

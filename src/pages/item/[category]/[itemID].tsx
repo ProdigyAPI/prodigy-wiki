@@ -20,9 +20,9 @@ const ItemDataPage: NextPage<Props> = ({ itemData, assetUrl, effects }) => {
     const theme = useTheme()
 
     const centerText = css`
-        text-align: center;   
+        text-align: center;
         margin-left: 1rem;
-        margin-right: 1rem;             
+        margin-right: 1rem;
     `
 
     const headerTwo = css`
