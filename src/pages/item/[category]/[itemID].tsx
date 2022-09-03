@@ -9,6 +9,7 @@ import GradientTextAnimation from "../../../components/GradientTextAnimation"
 import { css, useTheme } from "@emotion/react"
 import Image from "next/image"
 import _ from "lodash"
+import { BsFillCaretLeftFill, BsFillCaretRightFill } from "react-icons/bs"
 
 interface Props {
     itemData: ItemDataType
