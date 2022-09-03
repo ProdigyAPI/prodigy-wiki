@@ -121,6 +121,6 @@ export const getStaticProps: GetStaticProps = async context => {
 export const getStaticPaths: GetStaticPaths = async () => {
     return {
         paths: ids.map(id => ({ params: { category: id } })),
-        fallback: "blocking"
+        fallback: false
     }
 }

@@ -79,6 +79,6 @@ export const getStaticPaths: GetStaticPaths = async () => {
                 petID: pet.ID.toString()
             }
         })),
-        fallback: "blocking"
+        fallback: false
     }
 }
