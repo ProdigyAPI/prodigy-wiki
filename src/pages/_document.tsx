@@ -6,7 +6,6 @@ const MainDocument = (): JSX.Element => {
         <Html lang="en">
             <Head>
                 <meta name="theme-color" content="#524CFD" />
-                <meta name="og:image" content="/prodigy-wiki-icon.png" />
                 <Script
                     src="https://www.googletagmanager.com/gtag/js?id=G-77D52LPYJ9"
                     strategy="afterInteractive"
