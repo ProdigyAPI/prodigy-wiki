@@ -10,14 +10,17 @@ import { css, useTheme } from "@emotion/react"
 import Image from "next/image"
 import _ from "lodash"
 import { BsFillCaretLeftFill, BsFillCaretRightFill } from "react-icons/bs"
+import Link from "next/link"
 
 interface Props {
     itemData: ItemDataType
     assetUrl: string
     effects: AffixElement[]
+    nextID: number
+    prevID: number
 }
 
-const ItemDataPage: NextPage<Props> = ({ itemData, assetUrl, effects }) => {
+const ItemDataPage: NextPage<Props> = ({ itemData, assetUrl, effects, nextID, prevID }) => {
     const theme = useTheme()
 
     const centerText = css`
@@ -32,6 +35,11 @@ const ItemDataPage: NextPage<Props> = ({ itemData, assetUrl, effects }) => {
         margin: 0;
     `
 
+    const arrowIcon = css`
+        font-size: 4rem;
+        color: #008080;
+    `
+
     return (
         <div>
             <Head>
@@ -41,9 +49,25 @@ const ItemDataPage: NextPage<Props> = ({ itemData, assetUrl, effects }) => {
                 <meta name="og:description" content={`A bunch of information about the item ${itemData.data.name} in the math game Prodigy.`} />
                 <meta name="og:image" content={assetUrl} />
             </Head>
-            <Header>
-                <GradientTextAnimation startingColor="#008080" endingColor={theme.colors.text}>{itemData.data.name}</GradientTextAnimation>
-            </Header>
+            <div css={css`
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+            `}>
+                <Link href={`/item/${itemData.type}/${prevID}`} passHref>
+                    <a>
+                        <BsFillCaretLeftFill css={arrowIcon} />
+                    </a>
+                </Link>
+                <Header>
+                    <GradientTextAnimation startingColor="#008080" endingColor={theme.colors.text}>{itemData.data.name}</GradientTextAnimation>
+                </Header>
+                <Link href={`/item/${itemData.type}/${nextID}`} passHref>
+                    <a>
+                        <BsFillCaretRightFill css={arrowIcon} />
+                    </a>
+                </Link>
+            </div>
             <div css={centerText}>
                 <Image src={assetUrl} alt={itemData.data.name} width={160} height={160} />
             </div>
@@ -86,8 +110,12 @@ export default ItemDataPage
 
 export const getStaticProps: GetStaticProps = async context => {
     const gameData = await getCachedGameData()
+
+    const itemCollection = gameData[context.params?.category as keyof GameData]
+
     // @ts-expect-error
-    const itemData = gameData[context.params?.category as keyof GameData].find((e: ItemDataType) => e.ID === parseInt(context.params?.itemID?.toString() ?? "")) as ItemDataType
+    const itemIndex = itemCollection.findIndex((e: ItemDataType) => e.ID === parseInt(context.params?.itemID?.toString() ?? ""))
+    const itemData = itemCollection[itemIndex] as ItemDataType
 
     let itemDataForAsset = itemData
     if (itemData.type === "item") {
@@ -115,11 +143,27 @@ export const getStaticProps: GetStaticProps = async context => {
         }
     }
 
+    let prevIndex = itemIndex - 1
+    let nextIndex = itemIndex + 1
+
+    if (prevIndex < 0) {
+        prevIndex = itemCollection.length - 1
+    }
+
+    if (nextIndex >= itemCollection.length) {
+        nextIndex = 0
+    }
+
+    const nextID = (itemCollection[nextIndex] as ItemDataType).ID
+    const prevID = (itemCollection[prevIndex] as ItemDataType).ID
+
     return {
         props: {
             itemData,
             assetUrl,
-            effects
+            effects,
+            nextID,
+            prevID
         },
         revalidate: 6000
     }
