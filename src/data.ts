@@ -15,7 +15,7 @@ export const dateToText = (date: Date): string => {
     const timeZone = typeof Intl === "undefined" ? "America/New_York" : Intl.DateTimeFormat().resolvedOptions().timeZone
     const creationDate = utcToZonedTime(date, timeZone)
 
-    return format(creationDate, "EEEE, LLLL d, yyyy 'at' h:m a z", {
+    return format(creationDate, "EEEE, LLLL d, yyyy 'at' h:mm:ss a z", {
         timeZone
     })
 }
