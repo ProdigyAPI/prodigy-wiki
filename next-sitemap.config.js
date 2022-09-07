@@ -1,6 +1,6 @@
 /** @type {import('next-sitemap').IConfig} */
 module.exports = {
-    siteUrl: "https://prodigywiki.com",
+    siteUrl: "https://www.prodigywiki.com",
     generateRobotsTxt: true,
     generateIndexSitemap: false
 }
