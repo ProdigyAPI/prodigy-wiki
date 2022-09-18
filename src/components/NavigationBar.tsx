@@ -43,7 +43,7 @@ const NavigationBar: NextComponentType<NextPageContext, {}, Props> = ({ isDarkMo
                 align-items: center;
                 flex-wrap: wrap;
             }
-        `}>
+        `} data-nosnippet>
             <div css={css`
                 display: flex;
                 justify-content: center;
@@ -141,7 +141,7 @@ const NavigationBar: NextComponentType<NextPageContext, {}, Props> = ({ isDarkMo
                 }} title={"Toggle Dark Mode"}>
                     <DarkModeTag css={css`
                         color: ${theme.colors.navigationBarText};
-                        font-size: 1.5rem;  
+                        font-size: 1.5rem;
                         margin-right: 0.5rem;
                     `} />
                 </button>

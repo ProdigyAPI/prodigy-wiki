@@ -23,6 +23,7 @@ const Pets: NextPage<Props> = ({ pets }) => {
                 <meta name="description" content="A bunch of information about the pets in the math game Prodigy." />
                 <meta name="og:description" content="A bunch of information about the pets in the math game Prodigy." />
                 <meta name="og:image" content="/prodigy-wiki-icon.png" />
+                <meta name="og:image:alt" content="Prodigy Wiki icon" />
             </Head>
             <Header>
                 <GradientTextAnimation startingColor="#008080" endingColor={theme.colors.text}>Pets</GradientTextAnimation>

@@ -14,6 +14,7 @@ const Page404: NextPage = () => {
                 <title>404 - Prodigy Wiki</title>
                 <meta name="og:title" content="404 - Prodigy Wiki" />
                 <meta name="og:image" content="/prodigy-wiki-icon.png" />
+                <meta name="og:image:alt" content="Prodigy Wiki icon" />
             </Head>
             <Header>
                 <GradientTextAnimation startingColor="#008080" endingColor={theme.colors.text}>404 Page Not Found</GradientTextAnimation>
