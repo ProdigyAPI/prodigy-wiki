@@ -34,7 +34,7 @@ const ItemCard: NextComponentType<NextPageContext, {}, Props> = (
                 <LinkText linkColor={theme.colors.cardLink} backgroundSize={2}>
                     <GradientTextAnimation css={css`
                         font-size: 1.25rem;
-                    `} startingColor={theme.colors.cardStarting} endingColor={theme.colors.cardEnding} animationDuration={_.random(1, 2, true)}>{replaceNameWithType ? idsToNames.get(itemData.type) : itemData.data.name}</GradientTextAnimation>
+                    `} startingColor={theme.colors.cardStarting} endingColor={theme.colors.cardEnding} animationDuration={1.5}>{replaceNameWithType ? idsToNames.get(itemData.type) : itemData.data.name}</GradientTextAnimation>
                 </LinkText>
             </Link>
             {showCreationDate && (
