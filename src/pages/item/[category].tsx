@@ -30,6 +30,7 @@ const ItemPage: NextPage<Props> = ({ itemData }) => {
                 <meta name="og:description" content={`A bunch of information about ${itemName as string} in the math game Prodigy.`} />
                 <meta name="og:image" content="/prodigy-wiki-icon.png" />
                 <meta name="og:image:alt" content="Prodigy Wiki icon" />
+                <meta name="keywords" content={`${itemName as string}, prodigy ${itemName as string}, prodigy items, Prodigy, Prodigy Wiki, Prodigy-Wiki, prodigy, math game, prodigy math game`} />
             </Head>
             <Header>
                 <GradientTextAnimation startingColor="#008080" endingColor={theme.colors.text} animationDuration={2}>{itemName}</GradientTextAnimation>

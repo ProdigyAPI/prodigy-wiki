@@ -50,6 +50,7 @@ const ItemDataPage: NextPage<Props> = ({ itemData, assetUrl, effects, nextID, pr
                 <meta name="og:image" content={assetUrl} />
                 <meta name="og:image:alt" content={`${itemData.data.name} icon`} />
                 <meta name="og:type" content="article" />
+                <meta name="keywords" content={`${itemData.data.name}, ${itemData.type} ${itemData.data.name}, ${itemData.type}, prodigy ${itemData.data.name}, Prodigy, Prodigy Wiki, Prodigy-Wiki, prodigy, math game, prodigy math game`} />
             </Head>
             <div css={css`
                 display: flex;

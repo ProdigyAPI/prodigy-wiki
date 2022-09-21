@@ -34,6 +34,7 @@ const PetPage: NextPage<Props> = ({ pet, spells }) => {
                 <meta name="og:image" content={`https://cdn.prodigygame.com/game/assets/v1_cache/single-images/icon-${pet.type}-${pet.ID}/${pet.metadata.vIcon ?? 0}/icon-${pet.type}-${pet.ID}.png`} />
                 <meta name="og:image:alt" content={`${pet.data.name} icon`} />
                 <meta name="og:type" content="article" />
+                <meta name="keywords" content={`${pet.data.name}, prodigy ${pet.data.name}, prodigy wiki ${pet.data.name}, prodigy pet ${pet.data.name}, Prodigy, Prodigy Wiki, Prodigy-Wiki, prodigy, math game, prodigy math game, prodigy pets`} />
             </Head>
             <Header>
                 <GradientTextAnimation startingColor="#008080" endingColor={theme.colors.text}>{pet.data.name}</GradientTextAnimation>
