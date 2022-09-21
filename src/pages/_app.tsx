@@ -45,6 +45,7 @@ const darkTheme: Theme = {
 const App = ({ Component, pageProps }: AppProps): JSX.Element => {
     const router = useRouter()
     const [isDarkMode, setIsDarkMode] = useState(false)
+    const [giscusRefresh, setGiscusRefresh] = useState(false)
     const theme = isDarkMode ? darkTheme : lightTheme
 
     useEffect(() => {
@@ -61,6 +62,7 @@ const App = ({ Component, pageProps }: AppProps): JSX.Element => {
             // @ts-expect-error
             document.querySelectorAll("table").forEach(table => window.Tablesort(table))
         })()
+        setGiscusRefresh(giscusRefresh => !giscusRefresh)
     }, [router.asPath])
 
     useEffect(() => {
@@ -133,6 +135,8 @@ const App = ({ Component, pageProps }: AppProps): JSX.Element => {
             `}>
                 <Component {...pageProps} />
                 <Giscus
+                    // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
+                    key={`giscus-${giscusRefresh}`}
                     repo="ProdigyAPI/prodigy-wiki"
                     repoId="R_kgDOH6Qzkg"
                     category="General"
