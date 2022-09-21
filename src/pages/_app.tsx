@@ -4,6 +4,9 @@ import { Global, css, ThemeProvider, Theme } from "@emotion/react"
 import NavigationBar from "../components/NavigationBar"
 import { useRouter } from "next/router"
 import Giscus from "@giscus/react"
+import Head from "next/head"
+
+export const siteRoot = "https://www.prodigywiki.com"
 
 const lightTheme: Theme = {
     colors: {
@@ -66,6 +69,9 @@ const App = ({ Component, pageProps }: AppProps): JSX.Element => {
 
     return (
         <ThemeProvider theme={theme}>
+            <Head>
+                <link rel="canonical" href={`${siteRoot}${router.asPath}`} />
+            </Head>
             <Global styles={css`
                 body {
                     margin: 0;
