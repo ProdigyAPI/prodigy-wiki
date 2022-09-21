@@ -3,6 +3,7 @@ import type { AppProps } from "next/app"
 import { Global, css, ThemeProvider, Theme } from "@emotion/react"
 import NavigationBar from "../components/NavigationBar"
 import { useRouter } from "next/router"
+import Giscus from "@giscus/react"
 
 const lightTheme: Theme = {
     colors: {
@@ -70,7 +71,7 @@ const App = ({ Component, pageProps }: AppProps): JSX.Element => {
                     margin: 0;
                     font-family:
                         system-ui,
-                        -apple-system, 
+                        -apple-system,
                         "Segoe UI",
                         Roboto,
                         Helvetica,
@@ -121,7 +122,24 @@ const App = ({ Component, pageProps }: AppProps): JSX.Element => {
                 }
             `} />
             <NavigationBar isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode} />
-            <Component {...pageProps} />
+            <article css={css`
+                margin: 0 0.8rem 1.2rem;
+            `}>
+                <Component {...pageProps} />
+                <Giscus
+                    repo="ProdigyAPI/prodigy-wiki"
+                    repoId="R_kgDOH6Qzkg"
+                    category="General"
+                    categoryId="DIC_kwDOH6Qzks4CRj2G"
+                    mapping="title"
+                    strict="1"
+                    reactionsEnabled="1"
+                    emitMetadata="0"
+                    inputPosition="top"
+                    theme={isDarkMode ? "dark" : "light"}
+                    lang="en"
+                />
+            </article>
         </ThemeProvider>
     )
 }

@@ -74,39 +74,37 @@ const ItemDataPage: NextPage<Props> = ({ itemData, assetUrl, effects, nextID, pr
             <div css={centerText}>
                 <Image src={assetUrl} alt={itemData.data.name} width={160} height={160} />
             </div>
-            <article>
-                <p css={centerText}>
+            <p css={centerText}>
+                { /* @ts-expect-error */ }
+                {Object.prototype.hasOwnProperty.call(itemData.data, "flavorText") ? itemData.data.flavorText : itemData.data.description}
+                {" "} This item was created on {dateToText(itemData.createDate)}.
+                {Object.prototype.hasOwnProperty.call(itemData.data, "member") && <>
                     { /* @ts-expect-error */ }
-                    {Object.prototype.hasOwnProperty.call(itemData.data, "flavorText") ? itemData.data.flavorText : itemData.data.description}
-                    {" "} This item was created on {dateToText(itemData.createDate)}.
-                    {Object.prototype.hasOwnProperty.call(itemData.data, "member") && <>
-                        { /* @ts-expect-error */ }
-                        {" "} The {itemData.data.name} is {itemData.data.member === 0 ? "not" : ""} member only.
-                    </>}
-                    {Object.prototype.hasOwnProperty.call(itemData.data, "rarity") && <>
-                        { /* @ts-expect-error */ }
-                        {" "} This item is {Rarity[itemData.data.rarity]}.
-                    </>}
-                    {Object.prototype.hasOwnProperty.call(itemData.data, "price") && <>
-                        { /* @ts-expect-error */ }
-                        {" "} This item costs {itemData.data.price} gold.
-                    </>}
-                </p>
-                {effects.length > 0 && <>
-                    <h2 css={headerTwo}>
-                        <GradientTextAnimation startingColor="#008080" endingColor={theme.colors.text} animationDuration={2} css={css`
-                        font-size: inherit;
-                    `}>Effects</GradientTextAnimation>
-                    </h2>
-                    <p css={centerText}>
-                    This item has the following effects: {effects.map((effect, index) => <>
-                            <span css={css`
-                            color: ${theme.colors.text};
-                        `}>{index > 0 ? "," : ""} {effect.data.name} (Boost of {1 + (effect.data.valuePercent ?? 0)})</span>
-                        </>)}
-                    </p>
+                    {" "} The {itemData.data.name} is {itemData.data.member === 0 ? "not" : ""} member only.
                 </>}
-            </article>
+                {Object.prototype.hasOwnProperty.call(itemData.data, "rarity") && <>
+                    { /* @ts-expect-error */ }
+                    {" "} This item is {Rarity[itemData.data.rarity]}.
+                </>}
+                {Object.prototype.hasOwnProperty.call(itemData.data, "price") && <>
+                    { /* @ts-expect-error */ }
+                    {" "} This item costs {itemData.data.price} gold.
+                </>}
+            </p>
+            {effects.length > 0 && <>
+                <h2 css={headerTwo}>
+                    <GradientTextAnimation startingColor="#008080" endingColor={theme.colors.text} animationDuration={2} css={css`
+                    font-size: inherit;
+                `}>Effects</GradientTextAnimation>
+                </h2>
+                <p css={centerText}>
+                This item has the following effects: {effects.map((effect, index) => <>
+                        <span css={css`
+                        color: ${theme.colors.text};
+                    `}>{index > 0 ? "," : ""} {effect.data.name} (Boost of {1 + (effect.data.valuePercent ?? 0)})</span>
+                    </>)}
+                </p>
+            </>}
         </div>
     )
 }
