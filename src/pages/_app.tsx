@@ -148,6 +148,7 @@ const App = ({ Component, pageProps }: AppProps): JSX.Element => {
                     inputPosition="top"
                     theme={isDarkMode ? "dark" : "light"}
                     lang="en"
+                    loading="lazy"
                 />
             </article>
         </ThemeProvider>

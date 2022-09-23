@@ -13,9 +13,10 @@ import _ from "lodash"
 interface Props {
     pet: GameDataPet
     spells: Spell[]
+    spellsNotFound: boolean
 }
 
-const PetPage: NextPage<Props> = ({ pet, spells }) => {
+const PetPage: NextPage<Props> = ({ pet, spells, spellsNotFound }) => {
     const theme = useTheme()
 
     const centerText = css`
@@ -47,10 +48,14 @@ const PetPage: NextPage<Props> = ({ pet, spells }) => {
                 {" "} This pet was created on {dateToText(pet.createDate)}.
                 This pet&apos;s element is {pet.data.element}.
                 {" "} {pet.data.name} is {pet.data.member === 0 ? "not" : ""} member only.
-                All {pet.data.name} have the {pet.data.nativeSpells.map(e => spells.find(x => x.ID === e.spell)?.data.name).join(" and ")} spell.
-                For the third move it can be one of the following: {pet.data.foreignSpellPools[0].map(e => spells.find(x => x.ID === e)?.data.name).join(", ")}.
-                For the fourth move it can be one of the following: {pet.data.foreignSpellPools[1].map(e => spells.find(x => x.ID === e)?.data.name).join(", ")}.
-                {" "} {pet.data.name} has a health stat of {pet.data.statHealth} and a power stat of {pet.data.statPower}.
+                {spellsNotFound
+                    ? " The spells for this pet could not be found."
+                    : <>
+                    All {pet.data.name} have the {pet.data.nativeSpells.map(e => spells.find(x => x.ID === e.spell)?.data.name).join(" and ")} spell.
+                    For the third move it can be one of the following: {pet.data.foreignSpellPools[0].map(e => spells.find(x => x.ID === e)?.data.name).join(", ")}.
+                    For the fourth move it can be one of the following: {pet.data.foreignSpellPools[1].map(e => spells.find(x => x.ID === e)?.data.name).join(", ")}.
+                        {" "} {pet.data.name} has a health stat of {pet.data.statHealth} and a power stat of {pet.data.statPower}.
+                    </>}
             </p>
         </>
     )
@@ -67,7 +72,8 @@ export const getStaticProps: GetStaticProps = async context => {
     return {
         props: {
             pet,
-            spells: gameData.spell.filter(e => spellIdsNeeded.includes(e.ID))
+            spells: gameData.spell.filter(e => spellIdsNeeded.includes(e.ID)),
+            spellsNotFound: typeof pet.data.nativeSpells === "undefined" || typeof pet.data.foreignSpellPools === "undefined"
         },
         revalidate: 6000
     }
