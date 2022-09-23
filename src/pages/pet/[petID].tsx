@@ -62,7 +62,7 @@ export const getStaticProps: GetStaticProps = async context => {
     const gameData = await getCachedGameData()
     const petID = parseInt(context.params?.petID?.toString() ?? "0")
     const pet = gameData.pet.find(pet => pet.ID === petID) as GameDataPet
-    const spellIdsNeeded = _.concat(pet.data.nativeSpells.map(e => e.spell), _.flatten(pet.data.foreignSpellPools ?? []))
+    const spellIdsNeeded = _.concat(pet.data.nativeSpells?.map(e => e.spell) ?? [], _.flatten(pet.data.foreignSpellPools ?? []))
 
     return {
         props: {
