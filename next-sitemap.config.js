@@ -2,5 +2,5 @@
 module.exports = {
     siteUrl: "https://www.prodigywiki.com",
     generateRobotsTxt: true,
-    generateIndexSitemap: false
+    generateIndexSitemap: true
 }
