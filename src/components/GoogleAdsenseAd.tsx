@@ -7,7 +7,7 @@ interface GoogleAdsenseAdProps {
 }
 
 const GoogleAdsenseAd: FC<GoogleAdsenseAdProps> = ({ adSlot, adFormat = "autorelaxed" }) => {
-    const ref = useRef<HTMLDivElement>(null)
+    const ref = useRef<HTMLModElement>(null)
 
     useEffect(() => {
         // @ts-expect-error
