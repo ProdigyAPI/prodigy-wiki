@@ -9,6 +9,7 @@ import { ItemDataType, ItemDataTypeArray, itemsIds } from "../data"
 import { getCachedGameData } from "../gameDataHandler"
 import { GameData, GameDataItem } from "prodigy-api/lib/GameData"
 import ItemCard from "../components/ItemCard"
+import GoogleAdsenseAd from "../components/GoogleAdsenseAd"
 
 interface Props {
     cards: ItemDataTypeArray
@@ -49,6 +50,7 @@ const Index: NextPage<Props> = ({ cards, recentItems, cardsAssetUrl, recentItems
                     <ItemCard itemData={card} key={`${card.type}-${card.ID}`} replaceNameWithType={true} assetUrl={cardsAssetUrl[index]} />
                 ))}
             </div>
+            <GoogleAdsenseAd adSlot="1878857878" adFormat="auto"/>
             <Header css={css`
                 font-size: 2rem;
             `}>
