@@ -5,6 +5,7 @@ import NavigationBar from "../components/NavigationBar"
 import { useRouter } from "next/router"
 import Giscus from "@giscus/react"
 import Head from "next/head"
+import GoogleAdsenseAd from "../components/GoogleAdsenseAd"
 
 export const siteRoot = "https://www.prodigywiki.com"
 
@@ -134,6 +135,7 @@ const App = ({ Component, pageProps }: AppProps): JSX.Element => {
                 margin: 0 0.8rem 1.2rem;
             `}>
                 <Component {...pageProps} />
+                <GoogleAdsenseAd adSlot="1180815889"/>
                 <Giscus
                     // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
                     key={`giscus-${giscusRefresh}`}
