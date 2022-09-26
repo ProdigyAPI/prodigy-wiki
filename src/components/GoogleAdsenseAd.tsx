@@ -11,10 +11,11 @@ const GoogleAdsenseAd: FC<GoogleAdsenseAdProps> = ({ adSlot, adFormat = "autorel
 
     useEffect(() => {
         if (ref.current != null) {
-            ref.current.className = "adsbygoogle";
+            ref.current.className = "adsbygoogle"
             // @ts-expect-error
-            // eslint-disable-next-line
-            (adsbygoogle = window.adsbygoogle || []).push({});
+            if (window.adsbygoogle == null) window.adsbygoogle = []
+            // @ts-expect-error
+            window.adsbygoogle.push({})
         }
     }, [])
 
