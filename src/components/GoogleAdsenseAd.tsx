@@ -24,7 +24,7 @@ const GoogleAdsenseAd: FC<GoogleAdsenseAdProps> = ({ adSlot, adFormat = "autorel
             <ins data-ad-format={adFormat}
                 data-ad-client="ca-pub-8981394123170949"
                 data-ad-slot={adSlot}
-                style={{ display: "block" }}
+                style={{ display: "flex", justifyContent: "center" }}
                 ref={ref}
             />
         </>
