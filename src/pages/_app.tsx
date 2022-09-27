@@ -74,6 +74,7 @@ const App = ({ Component, pageProps }: AppProps): JSX.Element => {
         <ThemeProvider theme={theme}>
             <Head>
                 <link rel="canonical" href={`${siteRoot}${router.asPath}`} />
+                <meta name="propeller" content="7b0be454146a11d7dde6dca0284db163" />
             </Head>
             <Global styles={css`
                 body {
