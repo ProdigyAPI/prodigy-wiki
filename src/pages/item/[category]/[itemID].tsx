@@ -118,6 +118,11 @@ export const getStaticProps: GetStaticProps = async context => {
 
     // @ts-expect-error
     const itemIndex = itemCollection.findIndex((e: ItemDataType) => e.ID === parseInt(context.params?.itemID?.toString() ?? ""))
+    if (itemIndex === -1) {
+        return {
+            notFound: true
+        }
+    }
     const itemData = itemCollection[itemIndex] as ItemDataType
 
     let itemDataForAsset = itemData
@@ -186,6 +191,6 @@ export const getStaticPaths: GetStaticPaths = async () => {
                 }
             })
         })),
-        fallback: false
+        fallback: "blocking"
     }
 }

@@ -67,6 +67,11 @@ export const getStaticProps: GetStaticProps = async context => {
     const gameData = await getCachedGameData()
     const petID = parseInt(context.params?.petID?.toString() ?? "0")
     const pet = gameData.pet.find(pet => pet.ID === petID) as GameDataPet
+    if (typeof pet === "undefined") {
+        return {
+            notFound: true
+        }
+    }
     const spellIdsNeeded = _.concat(pet.data.nativeSpells?.map(e => e.spell) ?? [], _.flatten(pet.data.foreignSpellPools ?? []))
 
     return {
@@ -88,6 +93,6 @@ export const getStaticPaths: GetStaticPaths = async () => {
                 petID: pet.ID.toString()
             }
         })),
-        fallback: false
+        fallback: "blocking"
     }
 }
